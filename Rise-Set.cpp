@@ -20,8 +20,8 @@ int main(){
     maRise=0.9856*rise-3.289;
     maSet=0.9856*set-3.289;
     //calculate sun's true longitude
-    lRise=maRise+(1.916*sin(180/pi*maRise))+(0.02*sin(180/pi*2*maRise));
-    lSet=maSet+(1.916*sin(180/pi*maSet))+(0.02*sin(180/pi*2*maSet));
+    lRise=maRise+(1.916*sin(maRise))+(0.02*sin(2*maRise));
+    lSet=maSet+(1.916*sin(maSet))+(0.02*sin(2*maSet));
     if(lRise>360){
         lRise=lRise-360;
     }
@@ -35,8 +35,8 @@ int main(){
        lSet=lSet+360;
     }
     //calculate sun's right ascention
-    raRise=180/pi*atan(0.91764*tan(180/pi*lRise));
-    raSet=180/pi*atan(0.91764*tan(180/pi*lSet));
+    raRise=atan(0.91764*tan(lRise));
+    raSet=atan(0.91764*tan(lSet));
     if(raRise>360){
         raRise=raRise-360;
     }
@@ -60,17 +60,17 @@ int main(){
     raRiseH=raRise/15;
     raSetH=raSet/15;
     //calculate sun's declination
-    sinDecRise=0.39782*sin(180/pi*lRise);
-    sinDecSet=0.39782*sin(180/pi*lSet);
-    cosDecRise=cos(180/pi*180/pi*asin(sinDecRise));
-    cosDecSet=cos(180/pi*180/pi*asin(sinDecSet));
+    sinDecRise=0.39782*sin(lRise);
+    sinDecSet=0.39782*sin(lSet);
+    cosDecRise=cos(asin(sinDecRise));
+    cosDecSet=cos(asin(sinDecSet));
     //calculate sun's local hour angle
     zenith=90-raRise;
-    cosHRise=(cos(180/pi*zenith)-(sinDecRise*sin(180/pi*latitude)))/(cosDecRise*cos(180/pi*latitude));
-    cosHSet-(cos(180/pi*zenith)-(sinDecSet*sin(180/pi*latitude)))/(cosDecSet*cos(180/pi*latitude));
+    cosHRise=(cos(zenith)-(sinDecRise*sin(latitude)))/(cosDecRise*cos(latitude));
+    cosHSet=(cos(zenith)-(sinDecSet*sin(latitude)))/(cosDecSet*cos(latitude));
     //calculate sun's local hour
-    hRise=360-180/pi*acos(cosHRise);
-    hSet=180/pi*acos(cosHSet);
+    hRise=360-acos(cosHRise);
+    hSet=acos(cosHSet);
     hRise=hRise/15;
     hSet=hSet/15;
     //calculate mean time of rising and setting
@@ -94,6 +94,6 @@ int main(){
     //convert UTC to local time
     localTRise=utcRise+localOffset;
     localTSet=utcSet+localOffset;
-    
+
     return 0;
 }
