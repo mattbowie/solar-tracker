@@ -9,8 +9,8 @@ int main(){
 	United States Naval Observatory
 	Washington, DC 20392*/
 
-    float pi=3.14159, latitude=37.210388, longitude=-93.297256, longh, rise, set, maRise, maSet, lRise, lSet, raRise, raSet, lQuadRise, lQuadSet, raQuadRise, raQuadSet, raRiseH, raSetH, sinDecRise, sinDecSet, cosDecRise, cosDecSet, zenith, cosHRise, cosHSet, hRise, hSet, tRise, tSet, utcRise, utcSet, localTRise, localTSet;
-    short doy=150, localOffset=-6;
+    float pi=3.14159, latitude=37.210388, longitude=-93.297256, longh, rise, set, maRise, maSet, lRise, lSet, raRise, raSet, lQuadRise, lQuadSet, raQuadRise, raQuadSet, raRiseH, raSetH, sinDecRise, sinDecSet, cosDecRise, cosDecSet, zenith, cosHRise, cosHSet, hRise, hSet, tRise, tSet, utcRise, utcSet;
+    short doy=150;
 
     //convert long to hour and calculate time
     longh=longitude/15;
@@ -91,9 +91,6 @@ int main(){
     if(utcSet<0){
         utcSet=utcSet+24;
     }
-    //convert UTC to local time
-    localTRise=utcRise+localOffset;
-    localTSet=utcSet+localOffset;
 
     return 0;
 }
