@@ -27,7 +27,6 @@ EQT = 9.87*math.sin(2*B*(math.pi/180))-7.53*math.cos((math.pi/180)*B)-1.5*math.s
 
 Sunrise_Min_UTC = 720-4*(longitude+HA3)-EQT
 Sunrise_Hrs_UTC = Sunrise_Min_UTC/60
-#Rise_CST = Sunrise_Hrs_UTC-6
 
 hours = int(Sunrise_Hrs_UTC)
 minutes = (Sunrise_Hrs_UTC*60)%60
@@ -35,7 +34,6 @@ seconds = (Sunrise_Hrs_UTC*3600)%60
 
 Sunset_Min_UTC = 720-4*(longitude-HA3)-EQT
 Sunset_Hrs_UTC = Sunset_Min_UTC/60
-#Set_CST = Sunset_Hrs_UTC-6
 
 hours2 = int(Sunset_Hrs_UTC)
 minutes2 = (Sunset_Hrs_UTC*60)%60
