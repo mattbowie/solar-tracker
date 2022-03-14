@@ -1,24 +1,14 @@
-import sys
 import math
+import datetime
 
-from Day_of_Year import Day
+initFile=open(r"Parameters.txt","r")
+fields=initFile.readlines()
+initFile.close()
 
-lat = 37.211749
-long = -93.291829
+lat=float(fields[3])
+long=float(fields[6])
 
-#Determine Day of Year
-month = input('What month of the year are you in? Enter a numeric value between 1 and 12.\n')
-month = int(month)
-
-DOM = input('What day of the month is it? Enter a numeric value bewtween 1 and 31.\n')
-DOM = int(DOM)
-
-year = input('What year is it? Example 2022. \n')
-year = int(year)
-
-N = Day(month, DOM, year)
-
-#print(f"This date is on day {N} of the year.")
+N=datetime.datetime.now().timetuple().tm_yday
 
 #Step 1: Calculate Declination Angle
 DecAng = -math.asin(0.39779*math.cos((math.pi/180)*(0.98565*(N+10) + 1.914*math.sin((math.pi/180)*0.98565*(N-2)))))*(180/math.pi)
