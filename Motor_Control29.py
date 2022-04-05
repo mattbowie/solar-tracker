@@ -5,7 +5,7 @@ import sys
 GPIO.setmode(GPIO.BOARD)
 delay = 0.01 #2 millisecond
 step_pin = 38   #GPIO 20
-direction_pin = 40  #GPIO 21
+direction_pin = 37  #GPIO 21
 step_pin2 = 8 #GPIO 14
 direction_pin2 = 11 #GPIO 15
 GPIO.setup(step_pin2, GPIO.OUT)
@@ -39,12 +39,12 @@ def steps2 (n):
         
 def Motor1(twist_steps,direction):  #Tilt Motor
     
-    if (direction == True):  #Clockwise
-        GPIO.output(direction_pin, GPIO.HIGH)
+    if direction == 1:  #Clockwise
+        GPIO.output(direction_pin, GPIO.LOW)
         steps(twist_steps)
             
-    if (direction == False):  #Counterclockwise
-        GPIO.output(direction_pin, GPIO.LOW)
+    if direction == 2:  #Counterclockwise
+        GPIO.output(direction_pin, GPIO.HIGH)
         steps(twist_steps)
                  
     
