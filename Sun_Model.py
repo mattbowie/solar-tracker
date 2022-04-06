@@ -48,10 +48,10 @@ while True:
     print(f'Twist = {twist}')
 
     # Adjust twist to account for summer time. Twist will be greater than 90 deg at sunrise and less than -90 degrees at sunset. 
-    if twist < 0 and current_time < 18:
+    if twist < 0 and current_time < 16:
         twist = twist +180
     
-    if twist > 0 and current_time > 18:   #ISSUEEEEEEE
+    if twist > 0 and current_time > 20:   #ISSUEEEEEEE
         twist = twist -180
     
     Rise_CST = Sunrise(N, DecAng) #Sunrise Time Import
@@ -113,11 +113,11 @@ while True:
             print(f'tilt steps2 = {move_tilt}')
             Motor1(move_tilt,1)
             
-        if Twist_steps < 0:
-            current_twist_steps = current_twist_steps - move_twist
-        
-        elif Twist_steps > 0:
+        if current_twist_steps == 0:
             current_twist_steps = current_twist_steps + move_twist
+        
+        else:
+            current_twist_steps = current_twist_steps - move_twist
         
         current_tilt_steps = current_tilt_steps + move_tilt
             
