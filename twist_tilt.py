@@ -18,11 +18,11 @@ def Twist():
         twist = math.atan(-math.tan(HrAngl*(math.pi/180))/math.sin(lat*(math.pi/180)))*(180/math.pi)
 
         # Adjust twist to account for summer time. Twist will be greater than 90 deg at sunrise and less than -90 degrees at sunset. 
-        if twist < 0 and current_time < 18:
-            twist = twist +180
+        #if twist < 0 and current_time < 16:
+            #twist = twist +180
     
-        if twist > 0 and current_time > 18:   #ISSUEEEEEEE
-            twist = twist -180
+        #if twist > 0 and current_time > 20:   #ISSUEEEEEEE
+            #twist = twist -180
         
         Twist_steps = twist/0.067
     
