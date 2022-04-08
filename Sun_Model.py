@@ -52,10 +52,10 @@ while True:
         #twist = twist -180
     
     Rise_CST = Sunrise(N, DecAng) #Sunrise Time Import
-    Start = Rise_CST - 0.25  # Start at 15 minutes before Sunrise
+    Start = Rise_CST  # Start at 15 minutes before Sunrise
 
     Set_CST = Sunset(N, DecAng) #Sunset Time Import
-    Stop = Set_CST + 0.25   # Stop at 15 minutes after Sunset
+    Stop = Set_CST   # Stop at 15 minutes after Sunset
     
     
     #Twist_steps = twist/0.067    #Calculates the number of steps it needs to turn from zero
@@ -104,12 +104,15 @@ while True:
         
         else:
             current_twist_steps = current_twist_steps - move_twist
+            
         
-        if move_tilt > current_tilt_steps:
-            current_tilt_steps = current_tilt_steps + move_tilt
+        current_tilt_steps = tilt_steps
         
-        elif move_tilt < current_tilt_steps:
-            current_tilt_steps = current_tilt_steps - move_tilt
+        #if move_tilt > current_tilt_steps:
+            #current_tilt_steps = current_tilt_steps + move_tilt
+        
+        #elif move_tilt < current_tilt_steps:
+            #current_tilt_steps = current_tilt_steps - move_tilt
             
         print(f'current twist steps = {current_twist_steps}')
         
@@ -117,10 +120,13 @@ while True:
         
         print(' ')
             
-        time.sleep(300)
+        time.sleep(600)
         
-
-
+    home()
+    
+    while current_time > Stop or current_time < Start:
+        
+        time.sleep(600)
 
 
 
