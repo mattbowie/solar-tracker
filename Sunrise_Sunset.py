@@ -33,5 +33,3 @@ def Sunset (N2, decl):
     Set_CST = Sunset_Hrs_UTC-6
     
     return Set_CST
-
-

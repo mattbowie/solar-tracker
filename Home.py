@@ -37,16 +37,8 @@ def steps2 (n):
         time.sleep(delay)
         count += 1
         
-print('Help!!!')
-
-
-
-print(f"{GPIO.input(15) = }, {GPIO.LOW = }")
-
 GPIO.input(15) == 0
 
-#if GPIO.input(15) == GPIO.LOW:
-print('So help me')
 GPIO.output(direction_pin, GPIO.HIGH)
 while GPIO.input(15) == GPIO.HIGH:
     steps(10)

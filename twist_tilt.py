@@ -43,7 +43,6 @@ def Tilt():
         DecAng = -math.asin(0.39779*math.cos((math.pi/180)*(0.98565*(N+10) + 1.914*math.sin((math.pi/180)*0.98565*(N-2)))))*(180/math.pi)
         
         tilt = math.acos((math.cos(DecAng*(math.pi/180))*math.cos(HrAngl*(math.pi/180))*math.cos(lat*(math.pi/180)))+(math.sin(DecAng*(math.pi/180))*math.sin(lat*(math.pi/180))))*(180/math.pi)
-        #print(f"The tilt before angle is {tilt} degrees.") 
         tilt = 90-tilt
         tilt_steps = tilt /0.067
         

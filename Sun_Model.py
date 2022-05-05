@@ -21,7 +21,7 @@ lat,long = lat_long() # Import Lat_Long from .txt file
 
 N=datetime.datetime.now().timetuple().tm_yday # Counts which day of the year it is. Don't ask me how it works?!
 
-print ('System is homing')
+#Return to home
 home()
 
 while True:
@@ -31,7 +31,6 @@ while True:
     current_time_hrs = int(CST.hour)
     current_time_min = int(CST.minute)
     current_time = current_time_hrs+current_time_min/60
-    #print(current_time)
 
     #Step 1: Calculate Declination Angle
     DecAng = -math.asin(0.39779*math.cos((math.pi/180)*(0.98565*(N+10) + 1.914*math.sin((math.pi/180)*0.98565*(N-2)))))*(180/math.pi)
@@ -56,47 +55,28 @@ while True:
         current_time = Time()
         twist, Twist_steps = Twist()
         tilt, tilt_steps = Tilt()
-    
-        print(f'Twist degrees at {current_time} = {twist}')
-        print(f'Twist steps at {current_time} = {Twist_steps}')
-        
-        print(f'Tilt degrees at {current_time} = {tilt}') 
-        print(f'Tilt steps at {current_time} = {tilt_steps}')
-        
+            
         if Twist_steps < current_twist_steps:
             move_twist = abs(current_twist_steps - Twist_steps)
-            print(f'Twist Steps Moved 1 = {move_twist}')
             Motor2(move_twist,1)
                 
         elif Twist_steps > current_twist_steps:
             move_twist = abs(Twist_steps - current_twist_steps)
-            print(f'Twist Steps Moved 2 = {move_twist}')
             Motor2(move_twist,2)
             
         if tilt_steps < current_tilt_steps:
             move_tilt = current_tilt_steps - tilt_steps
-            print(f'Tilt Steps Moved 1 = {move_tilt}')
             Motor1(move_tilt,2)
                 
         elif tilt_steps > current_tilt_steps:
             move_tilt = tilt_steps - current_tilt_steps
-            print(f'Tilt Steps Moved 2 = {move_tilt}')
             Motor1(move_tilt,1)
             
             
         current_twist_steps = Twist_steps
         
         current_tilt_steps = tilt_steps
-            
-        print(f'current twist steps = {current_twist_steps}')
-        
-        print(f'current tilt steps = {current_tilt_steps}')
-        
-        print(c.voltage())
-        print(c.current())
-        print(c.power())
-        print(' ')
-        
+                    
         excel(current_time, c.voltage(), c.current(), c.power(), N)
             
         time.sleep(600)
@@ -107,7 +87,3 @@ while True:
         
         current_time = Time()
         time.sleep(300)
-
-
-
-

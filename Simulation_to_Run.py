@@ -28,28 +28,23 @@ time = [5.75, 6.0, 6.25, 6.5, 6.75, 7, 7.25, 7.5, 7.75, 8.0, 8.25, 8.5, 8.75, 9.
 current_twist_steps = 0
 current_tilt_steps = 0
 
-print('System is homing')
+#Return to home
 home()
 
 for x in time:
     
     #Step 1: Calculate Declination Angle
     DecAng = -math.asin(0.39779*math.cos((math.pi/180)*(0.98565*(N+10) + 1.914*math.sin((math.pi/180)*0.98565*(N-2)))))*(180/math.pi)
-    #print(f"The declination angle for the {N} day of the year is {DecAng} degrees.")
 
     #Step 2: Hour Angle Calculation
-    CST = x # This is 7:00 pm in CST THIS IS WHERE THE TIME INPUT NEEDS TO BE
+    CST = x
     GMT = CST-6
     SunLoc = -15*GMT
     HrAngl = long-SunLoc
-    #print(f"The hour angle is {HrAngl} degrees.")
-    print(f'Time is {x}')
 
     #Step 3: Tilt for Panel
     tilt_reg = math.acos((math.cos(DecAng*(math.pi/180))*math.cos(HrAngl*(math.pi/180))*math.cos(lat*(math.pi/180)))+(math.sin(DecAng*(math.pi/180))*math.sin(lat*(math.pi/180))))*(180/math.pi)
     tilt_adj = 90-tilt_reg
-    print(f"The tilt reg angle is {tilt_reg} degrees.") # If tilt angle is greater than 90 then it it dark outside and the panel should not be running!!!!
-    print(f"The tilt adjusted angle is {tilt_adj} degrees.")
     
     #Step 4: Assembly Twist
     twist = math.atan(-math.tan(HrAngl*(math.pi/180))/math.sin(lat*(math.pi/180)))*(180/math.pi)
@@ -64,36 +59,25 @@ for x in time:
     Twist_steps = twist/.067
     tilt_steps = tilt_adj/.067
     
-    print(f"The assmembly twist is {twist} degrees.")
     
     if Twist_steps < current_twist_steps:
         move_twist = abs(current_twist_steps - Twist_steps)
-        print(f'Twist Steps Moved 1 = {move_twist}')
         Motor2(move_twist,1)
                 
     elif Twist_steps > current_twist_steps:
         move_twist = abs(Twist_steps - current_twist_steps)
-        print(f'Twist Steps Moved 2 = {move_twist}')
         Motor2(move_twist,2)
             
     if tilt_steps < current_tilt_steps:
         move_tilt = current_tilt_steps - tilt_steps
-        print(f'Tilt Steps Moved 1 = {move_tilt}')
         Motor1(move_tilt,2)
                 
     elif tilt_steps > current_tilt_steps:
         move_tilt = tilt_steps - current_tilt_steps
-        print(f'Tilt Steps Moved 2 = {move_tilt}')
         Motor1(move_tilt,1)
                  
     current_twist_steps = Twist_steps
         
     current_tilt_steps = tilt_steps
-            
-    print(f'current twist steps = {current_twist_steps}')
-        
-    print(f'current tilt steps = {current_tilt_steps}')
-        
-    print(' ')
-    
+                
 home()
