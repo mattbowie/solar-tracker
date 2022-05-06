@@ -46,7 +46,7 @@ while True:
     
     wb = Workbook()
     wb.title = "{N}"
-    wb.save(f"/media/pi/Lexar/{N}.xlsx")
+    wb.save(f"/home/pi/Desktop/SolarTracker/Data/{N}.xlsx")
     
     
     while current_time > Start and current_time < Stop:  #Daylight operation
